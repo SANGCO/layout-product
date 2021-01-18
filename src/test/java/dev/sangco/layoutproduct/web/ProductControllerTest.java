@@ -15,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
 import java.util.List;
 
 import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
@@ -130,7 +129,7 @@ class ProductControllerTest {
     @Test
     @DisplayName("Product delete fail 테스트")
     public void deleteProductFailTest() throws Exception {
-        mockMvc.perform(delete("/products/" + product.getId()))
+        mockMvc.perform(delete("/products/test"))
                 .andDo(print())
                 .andExpect(status().isBadRequest())
                 .andExpect(header().string(CONTENT_TYPE, APPLICATION_JSON_VALUE))
@@ -138,7 +137,31 @@ class ProductControllerTest {
     }
 
     @Test
-    @DisplayName("Product findAll 조회 테스트")
+    @DisplayName("Product findById 테스트")
+    public void findByIdProductTest() throws Exception {
+        mockMvc.perform(get("/products/" + product.getId())
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(header().string(CONTENT_TYPE, APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("data").exists());
+    }
+
+    @Test
+    @DisplayName("Product findById fail 테스트")
+    public void findByIdProductFailTest() throws Exception {
+        mockMvc.perform(get("/products/test")
+                .contentType(APPLICATION_JSON)
+                .accept(APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(header().string(CONTENT_TYPE, APPLICATION_JSON_VALUE))
+                .andExpect(jsonPath("code").value("IllegalArgumentException"));
+    }
+
+    @Test
+    @DisplayName("Product findAll 테스트")
     public void findAllProductTest() throws Exception {
         mockMvc.perform(get("/products")
                 .contentType(APPLICATION_JSON)

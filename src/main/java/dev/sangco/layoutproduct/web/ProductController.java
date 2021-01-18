@@ -30,7 +30,7 @@ public class ProductController {
         return ResponseEntity.created(URI.create(String.format("/products/%s", responseDto.getId()))).body(new Result<ProductResponseDto>(responseDto));
     }
 
-    @PutMapping("/{id")
+    @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable String id, @RequestBody @Valid ProductRequestDto requestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().body(ErrorResponse.createErrorResponse(bindingResult));
@@ -39,13 +39,13 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
         productService.delete(id);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/{id")
+    @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable String id) {
         ProductResponseDto responseDto = productService.findById(id);
         return ResponseEntity.ok().body(new Result<ProductResponseDto>(responseDto));
