@@ -44,8 +44,8 @@ public class LayoutProductApplication {
 				Product product1 = Product.builder()
 						.name("프로덕트" + i)
 						.price(1000)
+						.layout(layout1)
 						.build();
-				product1.setLayout(layout1);
 				productRepository.save(product1);
 			});
 
@@ -53,8 +53,8 @@ public class LayoutProductApplication {
 				Product product2 = Product.builder()
 						.name("프로덕트" + i)
 						.price(2000)
+						.layout(layout2)
 						.build();
-				product2.setLayout(layout2);
 				productRepository.save(product2);
 			});
 
@@ -62,11 +62,10 @@ public class LayoutProductApplication {
 				Product product3 = Product.builder()
 						.name("프로덕트" + i)
 						.price(3000)
+						.layout(layout3)
 						.build();
-				product3.setLayout(layout3);
 				productRepository.save(product3);
 			});
-
 		});
 	}
 

@@ -1,23 +1,21 @@
 package dev.sangco.layoutproduct.web.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
+@Data
 public class ProductRequestDto {
 
     @NotBlank
     private String name;
 
-    @NotBlank
-    private int price;
+    @NotNull
+    private Integer price;
 
     @NotBlank
     private String layoutId;

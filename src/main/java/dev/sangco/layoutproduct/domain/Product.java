@@ -1,5 +1,6 @@
 package dev.sangco.layoutproduct.domain;
 
+import dev.sangco.layoutproduct.web.dto.ProductRequestDto;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,14 +29,17 @@ public class Product {
     private Layout layout;
 
     @Builder
-    public Product(String id, String name, int price) {
+    public Product(String id, String name, int price, Layout layout) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.layout = layout;
     }
 
-    public void setLayout(Layout layout) {
+    public void update(String name, int price, Layout layout) {
+        this.name = name;
+        this.price = price;
         this.layout = layout;
-        layout.getProducts().add(this);
     }
+
 }
